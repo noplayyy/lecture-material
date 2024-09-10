@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  2-example-swiftui
+//  example-swiftui-basic
 //
 //  Created by Yeonju on 9/8/24.
 //
