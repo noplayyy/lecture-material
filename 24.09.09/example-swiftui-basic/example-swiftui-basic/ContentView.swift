@@ -33,12 +33,24 @@ struct ContentView: View {
                     NavigationLink("HStack", value: Stack.hstack)
                     NavigationLink("ZStack", value: Stack.zstack)
                 }
+                Section(
+                    header: {
+                        Text("Practice")
+                            .font(.title3)
+                            .fontWeight(.bold)
+                    }()
+                ) {
+                    NavigationLink("Assignment", value: "Task")
+                }
             }
             .navigationDestination(for: Basic.self) { type in
                 BasicExample(type)
             }
             .navigationDestination(for: Stack.self) { type in
                 StackExample(type)
+            }
+            .navigationDestination(for: String.self) { _ in
+                PracticeAssignment()
             }
         }
     }
