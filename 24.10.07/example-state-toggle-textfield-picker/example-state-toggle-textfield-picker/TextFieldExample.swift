@@ -18,6 +18,7 @@ struct TextFieldExample: View {
             TextField("Enter Any Text", text: $text)
                 .font(.headline)
                 .foregroundStyle(Color.black)
+                .textFieldStyle(.roundedBorder)
         }
         .padding()
     }
