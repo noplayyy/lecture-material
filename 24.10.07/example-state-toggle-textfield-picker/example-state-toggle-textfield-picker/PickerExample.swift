@@ -12,9 +12,7 @@ struct PickerExample: View {
     
     var body: some View {
         ZStack {
-            Rectangle()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .foregroundStyle(pickerSelection)
+            BackgroundRectangleView(color: $pickerSelection)
             Picker("Background Color", selection: $pickerSelection) {
                 Group {
                     Text("white")
@@ -35,6 +33,16 @@ struct PickerExample: View {
             .pickerStyle(.wheel)
         }
         .ignoresSafeArea()
+    }
+}
+
+struct BackgroundRectangleView: View {
+    @Binding var color: Color
+    
+    var body: some View {
+        Rectangle()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .foregroundStyle(color)
     }
 }
 
