@@ -20,6 +20,7 @@ struct ContentView: View {
                 NavigationLink("Toggle", value: StateView.toggle)
                 NavigationLink("TextField", value: StateView.textfield)
                 NavigationLink("Picker", value: StateView.picker)
+                NavigationLink("Assignment", value: "Task")
             }
             .navigationDestination(for: StateView.self) { type in
                 switch type {
@@ -30,6 +31,9 @@ struct ContentView: View {
                 case .picker:
                     PickerExample()
                 }
+            }
+            .navigationDestination(for: String.self) { _ in
+                PracticeAssignment()
             }
         }
     }
