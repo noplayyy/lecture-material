@@ -8,14 +8,64 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject private var artworkData = ArtworkData()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            VStack(spacing: 30) {
+                ForEach(artworkData.artworks) { artwork in
+                    NavigationLink(destination: ArtworkDetailView(artwork: artwork)) {
+                        Text("\(artwork.title) | 👍: \(artwork.like)")
+                            .font(.title)
+                            .fontWeight(.heavy)
+                            .padding()
+                            .foregroundStyle(Color.white)
+                            .background(Color.black)
+                            .cornerRadius(20)
+                    }
+                }
+            }
+            .navigationTitle("작품 리스트")
         }
-        .padding()
+        .environmentObject(artworkData)
+    }
+}
+
+struct ArtworkDetailView: View {
+    var artwork: Artwork
+    @EnvironmentObject var artworkData: ArtworkData
+    
+    var body: some View {
+        VStack(spacing: 30) {
+            artwork.image
+                .resizable()
+                .scaledToFit()
+                .frame(width: 300)
+            
+            Text(artwork.title)
+                .font(.title)
+                .bold()
+            
+            VStack(alignment: .leading) {
+                Text("작가: \(artwork.artist)")
+                Text("제작 시기: \(artwork.date)")
+                Text("재료: \(artwork.material.map { $0.rawValue}.joined(separator: ","))")
+                Text("크기: \(artwork.width) x \(artwork.height) cm")
+            }
+            .frame(maxWidth: .infinity)
+            
+            Button(action: {
+                artworkData.increaseLike(artwork: artwork)
+            }) {
+                Text("👍: \(artwork.like)")
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundStyle(Color.white)
+                    .cornerRadius(10)
+            }
+        }
+        .navigationTitle(artwork.title)
     }
 }
 
