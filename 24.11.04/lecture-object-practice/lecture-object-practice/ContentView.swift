@@ -13,16 +13,33 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 30) {
-                ForEach(artworkData.artworks) { artwork in
-                    NavigationLink(destination: ArtworkDetailView(artwork: artwork)) {
-                        Text("\(artwork.title) | 👍: \(artwork.like)")
-                            .font(.title)
-                            .fontWeight(.heavy)
-                            .padding()
-                            .foregroundStyle(Color.white)
-                            .background(Color.black)
-                            .cornerRadius(20)
+//            VStack(spacing: 30) {
+//                ForEach(artworkData.artworks) { artwork in
+//                    NavigationLink(destination: ArtworkDetailView(artwork: artwork)) {
+//                        Text("\(artwork.title) | 👍: \(artwork.like)")
+//                            .font(.title)
+//                            .fontWeight(.heavy)
+//                            .padding()
+//                            .foregroundStyle(Color.white)
+//                            .background(Color.black)
+//                            .cornerRadius(20)
+//                    }
+//                }
+//            }
+            List(artworkData.artworks) { artwork in
+                NavigationLink(destination: ArtworkDetailView(artwork: artwork)) {
+                    HStack {
+                        artwork.image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 75)
+                        VStack(alignment: .leading) {
+                            Text(artwork.title)
+                                .font(.title)
+                                .fontWeight(.heavy)
+                            Text("👍: \(artwork.like)")
+                                .font(.headline)
+                        }
                     }
                 }
             }
