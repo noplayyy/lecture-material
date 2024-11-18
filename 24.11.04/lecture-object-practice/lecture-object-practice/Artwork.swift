@@ -53,7 +53,12 @@ class ArtworkData: ObservableObject {
     ]
     
     func increaseLike(artwork: Artwork) {
-        
+        for i in 0..<artworks.count {
+            if artworks[i].id == artwork.id {
+                artworks[i].like += 1
+                break
+            }
+        }
     }
 }
 
